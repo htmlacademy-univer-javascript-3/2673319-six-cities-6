@@ -1,11 +1,12 @@
 import React from 'react';
 import {PlaceCard} from '../components/place-card.tsx';
+import {Place} from '../models/place.ts';
 
 interface MainPageProps {
-  placesCount: number;
+  places: Place[];
 }
 
-export const MainPage: React.FC<MainPageProps> = ({placesCount}) => (
+export const MainPage: React.FC<MainPageProps> = ({places}) => (
   <div className="page page--gray page--main">
     <header className="header">
       <div className="container">
@@ -116,7 +117,7 @@ export const MainPage: React.FC<MainPageProps> = ({placesCount}) => (
             </form>
             <div className="cities__places-list places__list tabs__content">
               {
-                Array.from(Array(placesCount)).map(() => <PlaceCard/>)
+                places.map((place) => <PlaceCard key={place.id}/>)
               }
             </div>
           </section>
