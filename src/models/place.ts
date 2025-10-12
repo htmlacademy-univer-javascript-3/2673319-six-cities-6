@@ -1,4 +1,4 @@
-export class Place {
-  constructor(public id: number) {
-  }
-}
+export type Place = {
+  id: number;
+};
+
