@@ -1,0 +1,94 @@
+[
+  {
+    "id": "7e7b0bc4-2434-4873-a63e-e25724ebb477",
+    "title": "Penthouse, 4-5 rooms + 5 balconies",
+    "type": "hotel",
+    "price": 210,
+    "previewImage": "https://14.design.htmlacademy.pro/static/hotel/8.jpg",
+    "city": {
+      "name": "Dusseldorf",
+      "location": {
+        "latitude": 51.225402,
+        "longitude": 6.776314,
+        "zoom": 13
+      }
+    },
+    "location": {
+      "latitude": 51.239402000000005,
+      "longitude": 6.756314000000001,
+      "zoom": 16
+    },
+    "isFavorite": false,
+    "isPremium": false,
+    "rating": 3.1
+  },
+  {
+    "id": "d2e9b16b-8b19-4bb7-807e-ff4dd277da12",
+    "title": "The Pondhouse - A Magical Place",
+    "type": "apartment",
+    "price": 407,
+    "previewImage": "https://14.design.htmlacademy.pro/static/hotel/12.jpg",
+    "city": {
+      "name": "Dusseldorf",
+      "location": {
+        "latitude": 51.225402,
+        "longitude": 6.776314,
+        "zoom": 13
+      }
+    },
+    "location": {
+      "latitude": 51.243402,
+      "longitude": 6.791314,
+      "zoom": 16
+    },
+    "isFavorite": false,
+    "isPremium": false,
+    "rating": 3.4
+  },
+  {
+    "id": "e70e90f1-d905-4273-8f57-dcf700b8952a",
+    "title": "Wood and stone place",
+    "type": "room",
+    "price": 161,
+    "previewImage": "https://14.design.htmlacademy.pro/static/hotel/1.jpg",
+    "city": {
+      "name": "Dusseldorf",
+      "location": {
+        "latitude": 51.225402,
+        "longitude": 6.776314,
+        "zoom": 13
+      }
+    },
+    "location": {
+      "latitude": 51.214402,
+      "longitude": 6.764314000000001,
+      "zoom": 16
+    },
+    "isFavorite": false,
+    "isPremium": true,
+    "rating": 1.6
+  },
+  {
+    "id": "d7c0224f-7e8d-43da-ae3e-15a98432c838",
+    "title": "The Joshua Tree House",
+    "type": "house",
+    "price": 886,
+    "previewImage": "https://14.design.htmlacademy.pro/static/hotel/3.jpg",
+    "city": {
+      "name": "Dusseldorf",
+      "location": {
+        "latitude": 51.225402,
+        "longitude": 6.776314,
+        "zoom": 13
+      }
+    },
+    "location": {
+      "latitude": 51.225402,
+      "longitude": 6.784314,
+      "zoom": 16
+    },
+    "isFavorite": false,
+    "isPremium": true,
+    "rating": 3.2
+  }
+]
