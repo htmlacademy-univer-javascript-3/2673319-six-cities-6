@@ -1,0 +1,94 @@
+[
+  {
+    "id": "3dfb4c8d-7444-46a4-8f5b-ce80ad0cffbf",
+    "title": "Perfectly located Castro",
+    "type": "apartment",
+    "price": 294,
+    "previewImage": "https://14.design.htmlacademy.pro/static/hotel/4.jpg",
+    "city": {
+      "name": "Paris",
+      "location": {
+        "latitude": 48.85661,
+        "longitude": 2.351499,
+        "zoom": 13
+      }
+    },
+    "location": {
+      "latitude": 48.868610000000004,
+      "longitude": 2.342499,
+      "zoom": 16
+    },
+    "isFavorite": false,
+    "isPremium": false,
+    "rating": 2.6
+  },
+  {
+    "id": "5aa8053f-2d3b-414f-8b53-d220e113a1da",
+    "title": "Canal View Prinsengracht",
+    "type": "apartment",
+    "price": 157,
+    "previewImage": "https://14.design.htmlacademy.pro/static/hotel/20.jpg",
+    "city": {
+      "name": "Paris",
+      "location": {
+        "latitude": 48.85661,
+        "longitude": 2.351499,
+        "zoom": 13
+      }
+    },
+    "location": {
+      "latitude": 48.858610000000006,
+      "longitude": 2.330499,
+      "zoom": 16
+    },
+    "isFavorite": false,
+    "isPremium": false,
+    "rating": 2.4
+  },
+  {
+    "id": "3153c353-38b8-4e54-b689-2df57295f450",
+    "title": "Nice, cozy, warm big bed apartment",
+    "type": "apartment",
+    "price": 428,
+    "previewImage": "https://14.design.htmlacademy.pro/static/hotel/2.jpg",
+    "city": {
+      "name": "Paris",
+      "location": {
+        "latitude": 48.85661,
+        "longitude": 2.351499,
+        "zoom": 13
+      }
+    },
+    "location": {
+      "latitude": 48.834610000000005,
+      "longitude": 2.335499,
+      "zoom": 16
+    },
+    "isFavorite": false,
+    "isPremium": false,
+    "rating": 1.1
+  },
+  {
+    "id": "b427a2b0-3d82-4407-85c6-2fb97a9fc28d",
+    "title": "Penthouse, 4-5 rooms + 5 balconies",
+    "type": "house",
+    "price": 145,
+    "previewImage": "https://14.design.htmlacademy.pro/static/hotel/2.jpg",
+    "city": {
+      "name": "Cologne",
+      "location": {
+        "latitude": 50.938361,
+        "longitude": 6.959974,
+        "zoom": 13
+      }
+    },
+    "location": {
+      "latitude": 50.949361,
+      "longitude": 6.976974,
+      "zoom": 16
+    },
+    "isFavorite": false,
+    "isPremium": false,
+    "rating": 3.9
+  }
+]
