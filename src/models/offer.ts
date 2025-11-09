@@ -1,5 +1,6 @@
 import {Location} from './location.ts';
 import {City} from './city.ts';
+import {User} from './user.ts';
 
 export type OfferType = 'apartment' | 'room' | 'hotel';
 
@@ -17,4 +18,12 @@ export type OfferBase = {
 
 export type OfferPreview = OfferBase & {
   previewImage: string;
+}
+
+export type OfferReview = {
+  id: string;
+  date: string;
+  user: User;
+  comment: string;
+  rating: number;
 }

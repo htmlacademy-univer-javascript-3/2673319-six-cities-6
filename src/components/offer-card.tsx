@@ -13,8 +13,6 @@ export default function OfferCard({
   offerPreview,
   setActiveOffer,
 }: OfferCardProps) {
-  const offerDescriptionUrl = `${AppRoutes.OfferBase}/${offerPreview.id}`;
-
   function onMouseOver() {
     setActiveOffer(offerPreview.id);
   }
@@ -38,7 +36,7 @@ export default function OfferCard({
         </Link>
       </div>
       <div className="place-card__info">
-        <OfferPreviewInfo offerDescriptionUrl={offerDescriptionUrl} offerPreview={offerPreview}/>
+        <OfferPreviewInfo offerPreview={offerPreview}/>
       </div>
     </article>
   );
