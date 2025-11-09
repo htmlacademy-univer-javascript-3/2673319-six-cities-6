@@ -6,16 +6,18 @@ import OfferPage from './pages/offer/offer-page.tsx';
 import NotFoundPage from './pages/not-found-page.tsx';
 import PrivateRoute from './router/private-route.tsx';
 import {AppRoutes} from './router/app-routes.ts';
-import {OfferPreview} from './models/offer.ts';
+import {OfferPreview, OfferReview} from './models/offer.ts';
 
 interface AppProps {
   offerPreviews: OfferPreview[];
   favorites: OfferPreview[];
+  reviews: OfferReview[];
 }
 
 export default function App({
   offerPreviews,
   favorites,
+  reviews
 }: AppProps) {
   return (
     <BrowserRouter>
@@ -29,7 +31,11 @@ export default function App({
             </PrivateRoute>
           }
         />
-        <Route path={AppRoutes.Offer} element={<OfferPage/>}/>
+        <Route path={AppRoutes.Offer}
+          element={
+            <OfferPage offerReviews={reviews} nearOfferPreviews={offerPreviews.slice(0, 3)}/>
+          }
+        />
         <Route path="*" element={<NotFoundPage/>}/>
       </Routes>
     </BrowserRouter>

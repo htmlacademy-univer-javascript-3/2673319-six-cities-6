@@ -27,7 +27,7 @@ export default function FavoriteCard({
         </Link>
       </div>
       <div className="favorites__card-info place-card__info">
-        <OfferPreviewInfo offerDescriptionUrl={offerDescriptionUrl} offerPreview={favorite}/>
+        <OfferPreviewInfo offerPreview={favorite}/>
       </div>
     </article>
   );

@@ -1,16 +1,16 @@
 import {OfferPreview} from '../models/offer.ts';
 import RatingStars from './rating-stars.tsx';
 import {Link} from 'react-router-dom';
+import {AppRoutes} from '../router/app-routes.ts';
 
 interface OfferPreviewInfoProps {
-  offerDescriptionUrl: string;
   offerPreview: OfferPreview;
 }
 
 export default function OfferPreviewInfo({
-  offerDescriptionUrl,
   offerPreview,
 }: OfferPreviewInfoProps) {
+  const offerDescriptionUrl = `${AppRoutes.OfferBase}/${offerPreview.id}`;
   return (
     <>
       <div className="place-card__price-wrapper">
