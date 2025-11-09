@@ -3,6 +3,7 @@ import {useState} from 'react';
 import {Link} from 'react-router-dom';
 import {AppRoutes} from '../router/app-routes.ts';
 import OfferCardsList from '../components/offers-cards-list.tsx';
+import Map from '../components/map/map.tsx';
 
 interface MainPageProps {
   offerPreviews: OfferPreview[];
@@ -11,7 +12,7 @@ interface MainPageProps {
 export default function MainPage({
   offerPreviews,
 }: MainPageProps) {
-  const [, setActiveOffer] = useState<string | null>(null);
+  const [activeOfferId, setActiveOffer] = useState<string | null>(null);
 
   return (
     <div className="page page--gray page--main">
@@ -124,7 +125,9 @@ export default function MainPage({
               </div>
             </section>
             <div className="cities__right-section">
-              <section className="cities__map map"/>
+              <section className="cities__map map">
+                <Map city={offerPreviews[0].city} offers={offerPreviews} activeOfferId={activeOfferId}/>
+              </section>
             </div>
           </div>
         </div>
