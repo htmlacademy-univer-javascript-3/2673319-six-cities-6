@@ -1,8 +1,8 @@
-import {OfferBase} from '../../models/offer.ts';
-import {City} from '../../models/city.ts';
 import {useEffect, useRef} from 'react';
 import leaflet from 'leaflet';
 import 'leaflet/dist/leaflet.css';
+import {OfferBase} from '../../models/offer.ts';
+import {City} from '../../models/city.ts';
 import {useMap} from '../../hooks/useMap.ts';
 
 interface MapProps {

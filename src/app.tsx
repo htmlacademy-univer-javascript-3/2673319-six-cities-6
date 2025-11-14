@@ -1,5 +1,5 @@
-import MainPage from './pages/main-page.tsx';
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import MainPage from './pages/main-page.tsx';
 import LoginPage from './pages/login-page.tsx';
 import FavoritesPage from './pages/favorites/favorites-page.tsx';
 import OfferPage from './pages/offer/offer-page.tsx';

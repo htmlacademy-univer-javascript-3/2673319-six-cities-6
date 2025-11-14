@@ -1,7 +1,7 @@
+import {Link} from 'react-router-dom';
 import {OfferPreview} from '../../../models/offer.ts';
 import PremiumLabel from '../../../components/premium-label.tsx';
 import {AppRoutes} from '../../../router/app-routes.ts';
-import {Link} from 'react-router-dom';
 import OfferPreviewInfo from '../../../components/offer-preview-info.tsx';
 
 interface FavoriteCardProps {

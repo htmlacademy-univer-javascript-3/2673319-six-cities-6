@@ -1,6 +1,6 @@
-import {OfferPreview} from '../models/offer.ts';
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
+import {OfferPreview} from '../models/offer.ts';
 import {AppRoutes} from '../router/app-routes.ts';
 import OfferCardsList from '../components/offers-cards-list.tsx';
 import Map from '../components/map/map.tsx';
