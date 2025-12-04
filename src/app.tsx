@@ -1,5 +1,5 @@
 import {BrowserRouter, Route, Routes} from 'react-router-dom';
-import MainPage from './pages/main-page.tsx';
+import MainPage from './pages/main-page/main-page.tsx';
 import LoginPage from './pages/login-page.tsx';
 import FavoritesPage from './pages/favorites/favorites-page.tsx';
 import OfferPage from './pages/offer/offer-page.tsx';
@@ -22,7 +22,7 @@ export default function App({
   return (
     <BrowserRouter>
       <Routes>
-        <Route path={AppRoutes.Root} element={<MainPage offerPreviews={offerPreviews}/>}/>
+        <Route path={AppRoutes.Root} element={<MainPage/>}/>
         <Route path={AppRoutes.Login} element={<LoginPage/>}/>
         <Route path={AppRoutes.Favorites}
           element={
