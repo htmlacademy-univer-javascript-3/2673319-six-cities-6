@@ -1,6 +1,6 @@
+import {Link} from 'react-router-dom';
 import {OfferPreview} from '../models/offer.ts';
 import RatingStars from './rating-stars.tsx';
-import {Link} from 'react-router-dom';
 import {AppRoutes} from '../router/app-routes.ts';
 
 interface OfferPreviewInfoProps {

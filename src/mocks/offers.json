@@ -52,7 +52,7 @@
     "price": 161,
     "previewImage": "https://14.design.htmlacademy.pro/static/hotel/1.jpg",
     "city": {
-      "name": "Amsterdam",
+      "name": "Dusseldorf",
       "location": {
         "latitude": 52.377956,
         "longitude": 4.897070,
@@ -75,7 +75,7 @@
     "price": 886,
     "previewImage": "https://14.design.htmlacademy.pro/static/hotel/3.jpg",
     "city": {
-      "name": "Amsterdam",
+      "name": "Hamburg",
       "location": {
         "latitude": 52.377956,
         "longitude": 4.897070,
@@ -90,5 +90,74 @@
     "isFavorite": false,
     "isPremium": true,
     "rating": 3.2
+  },
+  {
+    "id": "2405a442-7189-4ba5-86af-3a71ce85c813",
+    "title": "Wood and stone place",
+    "type": "room",
+    "price": 258,
+    "previewImage": "https://14.design.htmlacademy.pro/static/hotel/11.jpg",
+    "city": {
+      "name": "Paris",
+      "location": {
+        "latitude": 48.85661,
+        "longitude": 2.351499,
+        "zoom": 13
+      }
+    },
+    "location": {
+      "latitude": 48.87561,
+      "longitude": 2.375499,
+      "zoom": 16
+    },
+    "isFavorite": false,
+    "isPremium": true,
+    "rating": 1.8
+  },
+  {
+    "id": "d8cbec85-4a9a-44ef-a428-d3ed52387a22",
+    "title": "House in countryside",
+    "type": "room",
+    "price": 178,
+    "previewImage": "https://14.design.htmlacademy.pro/static/hotel/17.jpg",
+    "city": {
+      "name": "Cologne",
+      "location": {
+        "latitude": 48.85661,
+        "longitude": 2.351499,
+        "zoom": 13
+      }
+    },
+    "location": {
+      "latitude": 48.87961000000001,
+      "longitude": 2.353499,
+      "zoom": 16
+    },
+    "isFavorite": false,
+    "isPremium": true,
+    "rating": 4.1
+  },
+  {
+    "id": "585ac3f3-ac14-48dd-86b2-ef2a3546c156",
+    "title": "The Pondhouse - A Magical Place",
+    "type": "apartment",
+    "price": 131,
+    "previewImage": "https://14.design.htmlacademy.pro/static/hotel/14.jpg",
+    "city": {
+      "name": "Brussels",
+      "location": {
+        "latitude": 48.85661,
+        "longitude": 2.351499,
+        "zoom": 13
+      }
+    },
+    "location": {
+      "latitude": 48.834610000000005,
+      "longitude": 2.364499,
+      "zoom": 16
+    },
+    "isFavorite": false,
+    "isPremium": false,
+    "rating": 1.3
   }
 ]

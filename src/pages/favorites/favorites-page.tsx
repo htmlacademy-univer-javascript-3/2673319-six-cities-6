@@ -1,5 +1,5 @@
-import {OfferPreview} from '../../models/offer.ts';
 import {Link} from 'react-router-dom';
+import {OfferPreview} from '../../models/offer.ts';
 import {AppRoutes} from '../../router/app-routes.ts';
 import {FavoritesList} from './components/favorites-list.tsx';
 

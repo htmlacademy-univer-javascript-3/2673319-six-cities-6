@@ -1,7 +1,7 @@
+import {Link} from 'react-router-dom';
 import {OfferPreview} from '../../../models/offer.ts';
 import OfferPreviewInfo from '../../../components/offer-preview-info.tsx';
 import {AppRoutes} from '../../../router/app-routes.ts';
-import {Link} from 'react-router-dom';
 
 interface NearOfferItemProps {
   nearOffer: OfferPreview;
