@@ -6,12 +6,15 @@ import Map from '../../components/map/map.tsx';
 import CitiesList from './components/cities-list.tsx';
 import {CITIES} from '../../mocks/mocks.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
+import OffersSortingOptions from './components/offers-sorting-options.tsx';
 
 export default function MainPage() {
   const [activeOfferId, setActiveOffer] = useState<string | null>(null);
   const cityName = useAppSelector((state) => state.city);
+  const offersSortingOption = useAppSelector((state) => state.sortingOption);
   const offerPreviews = useAppSelector((state) => state.offers)
-    .filter((o) => o.city.name === cityName);
+    .filter((o) => o.city.name === cityName)
+    .sort(offersSortingOption.compareFn);
 
   return (
     <div className="page page--gray page--main">
@@ -58,32 +61,7 @@ export default function MainPage() {
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{offerPreviews.length} places to stay in {cityName}</b>
-              <form className="places__sorting" action="#" method="get">
-                <span className="places__sorting-caption">Sort by</span>
-                <span className="places__sorting-type" tabIndex={0}>
-                  Popular
-                  <svg className="places__sorting-arrow" width={7} height={4}>
-                    <use xlinkHref="#icon-arrow-select"/>
-                  </svg>
-                </span>
-                <ul className="places__options places__options--custom places__options--opened">
-                  <li
-                    className="places__option places__option--active"
-                    tabIndex={0}
-                  >
-                    Popular
-                  </li>
-                  <li className="places__option" tabIndex={0}>
-                    Price: low to high
-                  </li>
-                  <li className="places__option" tabIndex={0}>
-                    Price: high to low
-                  </li>
-                  <li className="places__option" tabIndex={0}>
-                    Top rated first
-                  </li>
-                </ul>
-              </form>
+              <OffersSortingOptions/>
               <div className="cities__places-list places__list tabs__content">
                 <OfferCardsList offerPreviews={offerPreviews} setActiveOffer={setActiveOffer}/>
               </div>
