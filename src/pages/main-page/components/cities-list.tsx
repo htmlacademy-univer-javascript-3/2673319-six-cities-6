@@ -1,10 +1,10 @@
-import {CityName} from '../../../models/city.ts';
+import {City} from '../../../models/city.ts';
 import {useAppSelector} from '../../../hooks/use-app-selector.ts';
 import {useAppDispatch} from '../../../hooks/use-app-dispatch.ts';
 import {changeCity} from '../../../store/action.ts';
 
 interface CitiesListProps {
-  cities: readonly CityName[];
+  cities: readonly City[];
 }
 
 export default function CitiesList({
@@ -13,7 +13,7 @@ export default function CitiesList({
   const selectedCity = useAppSelector((state) => state.city);
   const dispatch = useAppDispatch();
 
-  function onCityClick(city: CityName) {
+  function onCityClick(city: City) {
     dispatch(changeCity({city: city}));
   }
 
@@ -23,13 +23,13 @@ export default function CitiesList({
         <ul className="locations__list tabs__list">
           {
             cities.map((city) => (
-              <li className="locations__item" key={city}>
+              <li className="locations__item" key={city.name}>
                 <a
                   className={`locations__item-link tabs__item ${selectedCity === city ? 'tabs__item--active' : ''}`}
                   onClick={() => onCityClick(city)}
                   href="#"
                 >
-                  <span>{city}</span>
+                  <span>{city.name}</span>
                 </a>
               </li>
             ))
