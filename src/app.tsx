@@ -7,18 +7,27 @@ import NotFoundPage from './pages/not-found-page.tsx';
 import PrivateRoute from './router/private-route.tsx';
 import {AppRoutes} from './router/app-routes.ts';
 import {OfferPreview, OfferReview} from './models/offer.ts';
+import {useAppSelector} from './hooks/use-app-selector.ts';
+import Spinner from './components/spinner/spinner.tsx';
 
 interface AppProps {
-  offerPreviews: OfferPreview[];
   favorites: OfferPreview[];
   reviews: OfferReview[];
 }
 
 export default function App({
-  offerPreviews,
   favorites,
   reviews
 }: AppProps) {
+  const isLoading = useAppSelector((state) => state.isLoading);
+  const offerPreviews = useAppSelector((state) => state.offers);
+
+  if (isLoading) {
+    return (
+      <Spinner/>
+    );
+  }
+
   return (
     <BrowserRouter>
       <Routes>

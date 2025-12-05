@@ -4,16 +4,16 @@ import {AppRoutes} from '../../router/app-routes.ts';
 import OfferCardsList from '../../components/offers-cards-list.tsx';
 import Map from '../../components/map/map.tsx';
 import CitiesList from './components/cities-list.tsx';
-import {CITIES} from '../../mocks/mocks.ts';
 import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import OffersSortingOptions from './components/offers-sorting-options.tsx';
+import {CITIES} from '../../models/city.ts';
 
 export default function MainPage() {
   const [activeOfferId, setActiveOffer] = useState<string | null>(null);
-  const cityName = useAppSelector((state) => state.city);
+  const city = useAppSelector((state) => state.city);
   const offersSortingOption = useAppSelector((state) => state.sortingOption);
   const offerPreviews = useAppSelector((state) => state.offers)
-    .filter((o) => o.city.name === cityName)
+    .filter((o) => o.city.name === city.name)
     .sort(offersSortingOption.compareFn);
 
   return (
@@ -60,7 +60,7 @@ export default function MainPage() {
           <div className="cities__places-container container">
             <section className="cities__places places">
               <h2 className="visually-hidden">Places</h2>
-              <b className="places__found">{offerPreviews.length} places to stay in {cityName}</b>
+              <b className="places__found">{offerPreviews.length} places to stay in {city.name}</b>
               <OffersSortingOptions/>
               <div className="cities__places-list places__list tabs__content">
                 <OfferCardsList offerPreviews={offerPreviews} setActiveOffer={setActiveOffer}/>
@@ -68,7 +68,7 @@ export default function MainPage() {
             </section>
             <div className="cities__right-section">
               <section className="cities__map map">
-                <Map city={offerPreviews[0].city} offers={offerPreviews} activeOfferId={activeOfferId}/>
+                <Map city={city} offers={offerPreviews} activeOfferId={activeOfferId}/>
               </section>
             </div>
           </div>
