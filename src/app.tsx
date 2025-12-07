@@ -35,7 +35,7 @@ export default function App({
         <Route path={AppRoutes.Login} element={<LoginPage/>}/>
         <Route path={AppRoutes.Favorites}
           element={
-            <PrivateRoute isAuthenticated>
+            <PrivateRoute>
               <FavoritesPage favorites={favorites}/>
             </PrivateRoute>
           }

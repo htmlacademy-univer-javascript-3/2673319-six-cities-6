@@ -1,3 +1,5 @@
 export enum ApiPaths {
-  Offers = '/offers'
+  Offers = '/offers',
+  Login = '/login',
+  Logout = '/logout',
 }

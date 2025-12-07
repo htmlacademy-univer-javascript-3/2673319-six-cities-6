@@ -2,14 +2,25 @@ import {createReducer} from '@reduxjs/toolkit';
 import {OFFERS_SORTING_OPTIONS} from '../mocks/mocks.ts';
 import {OfferBase, OfferPreview} from '../models/offer.ts';
 import {CITIES, City} from '../models/city.ts';
-import {changeCity, changeSortingOption, setLoading, updateOffers} from './action.ts';
+import {
+  changeCity,
+  changeSortingOption,
+  setAuthorizationStatus,
+  setCurrentUser,
+  setLoading,
+  updateOffers
+} from './action.ts';
 import {SortingOption} from '../models/sorting-option.ts';
+import {AuthorizationStatus} from '../models/authorization-status.ts';
+import {User} from '../models/user.ts';
 
 type InitialState = {
   city: City;
   offers: OfferPreview[];
   sortingOption: SortingOption<OfferBase>;
   isLoading: boolean;
+  authorizationStatus: AuthorizationStatus;
+  currentUser: User | null;
 }
 
 const initialState: InitialState = {
@@ -17,6 +28,8 @@ const initialState: InitialState = {
   offers: [],
   sortingOption: OFFERS_SORTING_OPTIONS[0],
   isLoading: false,
+  authorizationStatus: AuthorizationStatus.Unknown,
+  currentUser: null,
 };
 
 export const reducer = createReducer(initialState, (builder) => {
@@ -32,5 +45,11 @@ export const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setLoading, (state, action) => {
       state.isLoading = action.payload;
+    })
+    .addCase(setAuthorizationStatus, (state, action) => {
+      state.authorizationStatus = action.payload;
+    })
+    .addCase(setCurrentUser, (state, action) => {
+      state.currentUser = action.payload;
     });
 });

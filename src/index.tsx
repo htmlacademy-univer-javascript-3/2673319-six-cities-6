@@ -4,9 +4,10 @@ import App from './app.tsx';
 import {FAVORITES_MOCK, REVIEWS_MOCK} from './mocks/mocks.ts';
 import {Provider} from 'react-redux';
 import {store} from './store';
-import {fetchOfferPreviewsAction} from './store/api-actions.ts';
+import {checkAuthAction, fetchOfferPreviewsAction} from './store/api-actions.ts';
 
 store.dispatch(fetchOfferPreviewsAction());
+store.dispatch(checkAuthAction());
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
