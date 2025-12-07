@@ -6,6 +6,7 @@ import {loginAction} from '../store/api-actions.ts';
 import {AuthorizationStatus} from '../models/authorization-status.ts';
 import {AppRoutes} from '../router/app-routes.ts';
 import Header from '../components/header/header.tsx';
+import {getAuthorizationStatus} from '../store/user-process/selectors.ts';
 
 function isValidPassword(password: string) {
   const containsLetter = /[A-Za-z]/.test(password);
@@ -14,7 +15,7 @@ function isValidPassword(password: string) {
 }
 
 export default function LoginPage() {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const dispatch = useAppDispatch();
   const [formData, setFormData] = useState<{ email: string; password: string }>({email: '', password: ''});
 

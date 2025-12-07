@@ -1,14 +1,14 @@
-import {useState} from 'react';
+import {memo, useState} from 'react';
 import {useAppSelector} from '../../../hooks/use-app-selector.ts';
 import {useAppDispatch} from '../../../hooks/use-app-dispatch.ts';
-import {SortingOption} from '../../../models/sorting-option.ts';
+import {OFFERS_SORTING_OPTIONS, SortingOption} from '../../../models/sorting-option.ts';
 import {OfferBase} from '../../../models/offer.ts';
-import {changeSortingOptionAction} from '../../../store/action.ts';
-import {OFFERS_SORTING_OPTIONS} from '../../../mocks/mocks.ts';
+import {changeSortingOptionAction} from '../../../store/options-process/options-process.ts';
+import {getSortingOption} from '../../../store/options-process/selectors.ts';
 
-export default function OffersSortingOptions() {
+export const OffersSortingOptions = memo(() => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const selectedSortingOption = useAppSelector((state) => state.sortingOption);
+  const selectedSortingOption = useAppSelector(getSortingOption);
   const dispatch = useAppDispatch();
 
   function onOpenClick() {
@@ -16,7 +16,7 @@ export default function OffersSortingOptions() {
   }
 
   function onSortingOptionClick(sortingOption: SortingOption<OfferBase>) {
-    dispatch(changeSortingOptionAction({sortingOption}));
+    dispatch(changeSortingOptionAction(sortingOption));
     setIsOpen(!isOpen);
   }
 
@@ -47,4 +47,6 @@ export default function OffersSortingOptions() {
       )}
     </form>
   );
-}
+});
+
+OffersSortingOptions.displayName = 'OffersSortingOptions';

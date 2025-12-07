@@ -12,7 +12,7 @@ const RATING = {
 };
 
 const MIN_REVIEW_LENGTH = 50;
-const MAX_REVIEW_LENGTH = 1000;
+const MAX_REVIEW_LENGTH = 300;
 
 export default function OfferReviewForm() {
   const {id: offerId} = useParams<string>();

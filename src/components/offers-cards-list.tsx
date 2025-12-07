@@ -1,5 +1,5 @@
-import OfferCard from './offer-card.tsx';
 import {OfferPreview} from '../models/offer.ts';
+import {OfferCard} from './offer-card.tsx';
 
 interface OfferCardsListProps {
   offerPreviews: OfferPreview[];

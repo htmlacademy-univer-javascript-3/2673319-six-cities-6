@@ -1,20 +1,22 @@
 import {City} from '../../../models/city.ts';
 import {useAppSelector} from '../../../hooks/use-app-selector.ts';
 import {useAppDispatch} from '../../../hooks/use-app-dispatch.ts';
-import {changeCityAction} from '../../../store/action.ts';
+import {memo} from 'react';
+import {getCity} from '../../../store/options-process/selectors.ts';
+import {changeCityAction} from '../../../store/options-process/options-process.ts';
 
 interface CitiesListProps {
   cities: readonly City[];
 }
 
-export default function CitiesList({
-  cities,
-}: CitiesListProps) {
-  const selectedCity = useAppSelector((state) => state.city);
+export const CitiesList = memo(({
+  cities
+}: CitiesListProps)=> {
+  const selectedCity = useAppSelector(getCity);
   const dispatch = useAppDispatch();
 
   function onCityClick(city: City) {
-    dispatch(changeCityAction({city: city}));
+    dispatch(changeCityAction(city));
   }
 
   return (
@@ -38,4 +40,6 @@ export default function CitiesList({
       </section>
     </div>
   );
-}
+});
+
+CitiesList.displayName = 'CitiesList';
