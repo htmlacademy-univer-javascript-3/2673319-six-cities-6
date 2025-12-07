@@ -1,4 +1,7 @@
 import {ChangeEvent, FormEvent, Fragment, useState} from 'react';
+import {useParams} from 'react-router-dom';
+import {useAppDispatch} from '../../../hooks/use-app-dispatch.ts';
+import {sendReviewAction} from '../../../store/api-actions.ts';
 
 const RATING = {
   5: 'perfect',
@@ -8,24 +11,37 @@ const RATING = {
   1: 'terribly'
 };
 
-const MIN_REVIEW_LENGTH = 10;
-const MAX_REVIEW_LENGTH = 100;
+const MIN_REVIEW_LENGTH = 50;
+const MAX_REVIEW_LENGTH = 1000;
 
 export default function OfferReviewForm() {
-  const [formData, setFormData] = useState<{ rating: number | null; review: string }>({'rating': null, 'review': ''});
-  const isValid = formData.rating !== null &&
-    formData.review.length >= MIN_REVIEW_LENGTH &&
-    formData.review.length <= MAX_REVIEW_LENGTH;
+  const {id: offerId} = useParams<string>();
+  const [formData, setFormData] = useState<{ rating: number | null; review: string }>({rating: null, review: ''});
+  const isValid = formData.rating !== null && formData.review.length >= MIN_REVIEW_LENGTH && formData.review.length <= MAX_REVIEW_LENGTH;
+  const dispatch = useAppDispatch();
 
-  function onReviewChange(e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLTextAreaElement>) {
-    const {name, value} = e.currentTarget;
+  function onRatingChange(evt: ChangeEvent<HTMLInputElement>) {
+    const {name, value} = evt.currentTarget;
+    setFormData({...formData, [name]: Number(value)});
+  }
+
+  function onReviewChange(evt: ChangeEvent<HTMLTextAreaElement>) {
+    const {name, value} = evt.currentTarget;
     setFormData({...formData, [name]: value});
   }
 
-  function onFormSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault();
-    // eslint-disable-next-line no-console
-    console.log(formData);
+  function onFormSubmit(evt: FormEvent<HTMLFormElement>) {
+    evt.preventDefault();
+
+    if (offerId && formData.rating) {
+      try {
+        dispatch(sendReviewAction({offerId, comment: formData.review, rating: formData.rating}));
+        setFormData({rating: null, review: ''});
+      } catch {
+        // eslint-disable-next-line no-alert
+        alert('Failed to send review');
+      }
+    }
   }
 
   return (
@@ -42,7 +58,8 @@ export default function OfferReviewForm() {
               value={value}
               id={`${value}-stars`}
               type="radio"
-              onChange={onReviewChange}
+              onChange={onRatingChange}
+              checked={formData.rating?.toString() === value}
             />
             <label htmlFor={`${value}-stars`} className="reviews__rating-label form__rating-label" title={title}>
               <svg className="form__star-image" width={37} height={33}>
@@ -57,9 +74,9 @@ export default function OfferReviewForm() {
         id="review"
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
-        defaultValue={''}
         maxLength={MAX_REVIEW_LENGTH}
         onChange={onReviewChange}
+        value={formData.review}
       />
       <div className="reviews__button-wrapper">
         <p className="reviews__help">

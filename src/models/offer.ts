@@ -27,3 +27,12 @@ export type OfferReview = {
   comment: string;
   rating: number;
 }
+
+export type OfferDescription = OfferBase & {
+  description: string;
+  bedrooms: number;
+  goods: [string];
+  host: UserInfo;
+  images: [string];
+  maxAdults: number;
+}

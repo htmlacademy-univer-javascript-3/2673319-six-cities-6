@@ -1,4 +1,4 @@
-import {BrowserRouter, Route, Routes} from 'react-router-dom';
+import { Route, Routes} from 'react-router-dom';
 import MainPage from './pages/main-page/main-page.tsx';
 import LoginPage from './pages/login-page.tsx';
 import FavoritesPage from './pages/favorites/favorites-page.tsx';
@@ -6,30 +6,30 @@ import OfferPage from './pages/offer/offer-page.tsx';
 import NotFoundPage from './pages/not-found-page.tsx';
 import PrivateRoute from './router/private-route.tsx';
 import {AppRoutes} from './router/app-routes.ts';
-import {OfferPreview, OfferReview} from './models/offer.ts';
+import {OfferPreview} from './models/offer.ts';
 import {useAppSelector} from './hooks/use-app-selector.ts';
 import Spinner from './components/spinner/spinner.tsx';
+import {AuthorizationStatus} from './models/authorization-status.ts';
+import {HistoryRouter} from './components/history-route.tsx';
+import {browserHistory} from './browser-history.ts';
 
 interface AppProps {
   favorites: OfferPreview[];
-  reviews: OfferReview[];
 }
 
 export default function App({
   favorites,
-  reviews
 }: AppProps) {
-  const isLoading = useAppSelector((state) => state.isLoading);
-  const offerPreviews = useAppSelector((state) => state.offers);
+  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
 
-  if (isLoading) {
+  if (authorizationStatus === AuthorizationStatus.Unknown) {
     return (
       <Spinner/>
     );
   }
 
   return (
-    <BrowserRouter>
+    <HistoryRouter history={browserHistory}>
       <Routes>
         <Route path={AppRoutes.Root} element={<MainPage/>}/>
         <Route path={AppRoutes.Login} element={<LoginPage/>}/>
@@ -40,13 +40,9 @@ export default function App({
             </PrivateRoute>
           }
         />
-        <Route path={AppRoutes.Offer}
-          element={
-            <OfferPage offerReviews={reviews} nearOfferPreviews={offerPreviews.slice(0, 3)}/>
-          }
-        />
+        <Route path={AppRoutes.Offer} element={<OfferPage/>}/>
         <Route path="*" element={<NotFoundPage/>}/>
       </Routes>
-    </BrowserRouter>
+    </HistoryRouter>
   );
 }
