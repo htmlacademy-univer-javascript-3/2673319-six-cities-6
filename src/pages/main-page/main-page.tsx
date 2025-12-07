@@ -6,14 +6,22 @@ import {useAppSelector} from '../../hooks/use-app-selector.ts';
 import OffersSortingOptions from './components/offers-sorting-options.tsx';
 import {CITIES} from '../../models/city.ts';
 import Header from '../../components/header/header.tsx';
+import Spinner from '../../components/spinner/spinner.tsx';
 
 export default function MainPage() {
+  const isLoading = useAppSelector((state) => state.isOfferPreviewsLoading);
   const [activeOfferId, setActiveOffer] = useState<string | null>(null);
   const city = useAppSelector((state) => state.city);
   const offersSortingOption = useAppSelector((state) => state.sortingOption);
   const offerPreviews = useAppSelector((state) => state.offers)
     .filter((o) => o.city.name === city.name)
     .sort(offersSortingOption.compareFn);
+
+  if (isLoading) {
+    return (
+      <Spinner/>
+    );
+  }
 
   return (
     <div className="page page--gray page--main">

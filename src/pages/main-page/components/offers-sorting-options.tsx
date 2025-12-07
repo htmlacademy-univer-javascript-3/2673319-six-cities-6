@@ -3,7 +3,7 @@ import {useAppSelector} from '../../../hooks/use-app-selector.ts';
 import {useAppDispatch} from '../../../hooks/use-app-dispatch.ts';
 import {SortingOption} from '../../../models/sorting-option.ts';
 import {OfferBase} from '../../../models/offer.ts';
-import {changeSortingOption} from '../../../store/action.ts';
+import {changeSortingOptionAction} from '../../../store/action.ts';
 import {OFFERS_SORTING_OPTIONS} from '../../../mocks/mocks.ts';
 
 export default function OffersSortingOptions() {
@@ -16,7 +16,7 @@ export default function OffersSortingOptions() {
   }
 
   function onSortingOptionClick(sortingOption: SortingOption<OfferBase>) {
-    dispatch(changeSortingOption({sortingOption}));
+    dispatch(changeSortingOptionAction({sortingOption}));
     setIsOpen(!isOpen);
   }
 

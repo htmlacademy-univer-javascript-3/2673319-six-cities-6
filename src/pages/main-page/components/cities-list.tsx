@@ -1,7 +1,7 @@
 import {City} from '../../../models/city.ts';
 import {useAppSelector} from '../../../hooks/use-app-selector.ts';
 import {useAppDispatch} from '../../../hooks/use-app-dispatch.ts';
-import {changeCity} from '../../../store/action.ts';
+import {changeCityAction} from '../../../store/action.ts';
 
 interface CitiesListProps {
   cities: readonly City[];
@@ -14,7 +14,7 @@ export default function CitiesList({
   const dispatch = useAppDispatch();
 
   function onCityClick(city: City) {
-    dispatch(changeCity({city: city}));
+    dispatch(changeCityAction({city: city}));
   }
 
   return (
