@@ -1,13 +1,12 @@
-import {useEffect, useState, useRef, MutableRefObject} from 'react';
+import {useEffect, useState, MutableRefObject} from 'react';
 import leaflet from 'leaflet';
-import {City} from '../models/city.ts';
+import {City} from '../models/city';
 
 export function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): leaflet.Map | null {
   const [map, setMap] = useState<leaflet.Map | null>(null);
-  const isRenderedRef = useRef(false);
 
   useEffect(() => {
-    if (mapRef.current === null || isRenderedRef.current) {
+    if (!mapRef.current) {
       return;
     }
 
@@ -27,8 +26,24 @@ export function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City)
       .addTo(instance);
 
     setMap(instance);
-    isRenderedRef.current = true;
-  }, [mapRef, map, city]);
+
+    return () => {
+      instance.remove();
+      setMap(null);
+    };
+  }, [city.location.latitude, city.location.longitude, city.location.zoom, mapRef]);
+
+  useEffect(() => {
+    if (!map) {
+      return;
+    }
+
+    map.setView(
+      [city.location.latitude, city.location.longitude],
+      city.location.zoom,
+      {animate: false}
+    );
+  }, [map, city]);
 
   return map;
 }
