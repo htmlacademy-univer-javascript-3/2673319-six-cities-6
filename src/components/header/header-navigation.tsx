@@ -5,10 +5,11 @@ import {useAppDispatch} from '../../hooks/use-app-dispatch.ts';
 import {logoutAction} from '../../store/api-actions.ts';
 import {AuthorizationStatus} from '../../models/authorization-status.ts';
 import {AppRoutes} from '../../router/app-routes.ts';
+import {getAuthorizationStatus, getCurrentUser} from '../../store/user-process/selectors.ts';
 
-export default function HeaderNavigation() {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
-  const currentUser = useAppSelector((state) => state.currentUser);
+export function HeaderNavigation() {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
+  const currentUser = useAppSelector(getCurrentUser);
   const dispatch = useAppDispatch();
 
   function handleSignOut(evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
@@ -23,7 +24,7 @@ export default function HeaderNavigation() {
           <li className="header__nav-item user">
             <Link className="header__nav-link header__nav-link--profile" to={AppRoutes.Favorites}>
               <div className="header__avatar-wrapper user__avatar-wrapper">
-                <img className="user__avatar" src={currentUser!.avatarUrl}/>
+                <img className="user__avatar" src={currentUser!.avatarUrl} alt="User Avatar"/>
               </div>
               <span className="header__user-name user__name">{currentUser!.email}</span>
               <span className="header__favorite-count">3</span>

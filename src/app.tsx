@@ -6,21 +6,15 @@ import OfferPage from './pages/offer/offer-page.tsx';
 import NotFoundPage from './pages/not-found-page.tsx';
 import PrivateRoute from './router/private-route.tsx';
 import {AppRoutes} from './router/app-routes.ts';
-import {OfferPreview} from './models/offer.ts';
 import {useAppSelector} from './hooks/use-app-selector.ts';
 import Spinner from './components/spinner/spinner.tsx';
 import {AuthorizationStatus} from './models/authorization-status.ts';
 import {HistoryRouter} from './components/history-route.tsx';
 import {browserHistory} from './browser-history.ts';
+import {getAuthorizationStatus} from './store/user-process/selectors.ts';
 
-interface AppProps {
-  favorites: OfferPreview[];
-}
-
-export default function App({
-  favorites,
-}: AppProps) {
-  const authorizationStatus = useAppSelector((state) => state.authorizationStatus);
+export default function App() {
+  const authorizationStatus = useAppSelector(getAuthorizationStatus);
 
   if (authorizationStatus === AuthorizationStatus.Unknown) {
     return (
@@ -36,7 +30,7 @@ export default function App({
         <Route path={AppRoutes.Favorites}
           element={
             <PrivateRoute>
-              <FavoritesPage favorites={favorites}/>
+              <FavoritesPage/>
             </PrivateRoute>
           }
         />

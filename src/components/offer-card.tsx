@@ -3,16 +3,17 @@ import {OfferPreview} from '../models/offer.ts';
 import {AppRoutes} from '../router/app-routes.ts';
 import PremiumLabel from './premium-label.tsx';
 import OfferPreviewInfo from './offer-preview-info.tsx';
+import {memo} from 'react';
 
 interface OfferCardProps {
   offerPreview: OfferPreview;
   setActiveOffer: (id: string | null) => void;
 }
 
-export default function OfferCard({
+export const OfferCard = memo(({
   offerPreview,
-  setActiveOffer,
-}: OfferCardProps) {
+  setActiveOffer
+}: OfferCardProps) => {
   function onMouseOver() {
     setActiveOffer(offerPreview.id);
   }
@@ -40,4 +41,6 @@ export default function OfferCard({
       </div>
     </article>
   );
-}
+});
+
+OfferCard.displayName = 'OfferCard';

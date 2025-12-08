@@ -1,5 +1,5 @@
 import {Link, useLocation} from 'react-router-dom';
-import HeaderNavigation from './header-navigation.tsx';
+import {HeaderNavigation} from './header-navigation.tsx';
 import {AppRoutes} from '../../router/app-routes.ts';
 
 interface HeaderProps {
