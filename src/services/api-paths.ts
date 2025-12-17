@@ -4,6 +4,7 @@ export enum ApiPaths {
   NearbyOffers = '/offers/{offerId}/nearby',
   Reviews = '/comments/{offerId}',
   Favorite = '/favorite',
+  FavoriteEdit = '/favorite/{offerId}/{status}',
   Login = '/login',
   Logout = '/logout',
 }

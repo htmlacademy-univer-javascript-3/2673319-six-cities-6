@@ -1,12 +1,19 @@
-import {Navigate} from 'react-router-dom';
+import {Link, Navigate} from 'react-router-dom';
 import {useAppSelector} from '../hooks/use-app-selector.ts';
 import {useAppDispatch} from '../hooks/use-app-dispatch.ts';
-import {ChangeEvent, FormEvent, useState} from 'react';
+import React, {ChangeEvent, FormEvent, useState} from 'react';
 import {loginAction} from '../store/api-actions.ts';
 import {AuthorizationStatus} from '../models/authorization-status.ts';
 import {AppRoutes} from '../router/app-routes.ts';
 import Header from '../components/header/header.tsx';
 import {getAuthorizationStatus} from '../store/user-process/selectors.ts';
+import {changeCityAction} from '../store/options-process/options-process.ts';
+import {CITIES} from '../models/city.ts';
+
+function getRandomCity(): string {
+  const randomIndex = Math.floor(Math.random() * CITIES.length);
+  return CITIES[randomIndex].name;
+}
 
 function isValidPassword(password: string) {
   const containsLetter = /[A-Za-z]/.test(password);
@@ -33,6 +40,14 @@ export default function LoginPage() {
       return;
     }
     dispatch(loginAction({email: formData.email, password: password}));
+  }
+
+  function onCityLinkClick(event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
+    const span = event.currentTarget.querySelector('span');
+    if (span && span.textContent) {
+      const city = CITIES.find((c) => c.name === span.textContent)!;
+      dispatch(changeCityAction(city));
+    }
   }
 
   if (authorizationStatus === AuthorizationStatus.Auth) {
@@ -76,9 +91,9 @@ export default function LoginPage() {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <Link className="locations__item-link" to={AppRoutes.Root} onClick={onCityLinkClick}>
+                <span>{getRandomCity()}</span>
+              </Link>
             </div>
           </section>
         </div>

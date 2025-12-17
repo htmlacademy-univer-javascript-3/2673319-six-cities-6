@@ -8,6 +8,9 @@ import {AuthorizationStatus} from '../../../models/authorization-status.ts';
 import OfferReviewForm from './offer-review-form.tsx';
 import {getAuthorizationStatus} from '../../../store/user-process/selectors.ts';
 import {getReviews} from '../../../store/offers-data/selectors.ts';
+import BookmarkButton from '../../../components/bookmark-button.tsx';
+
+const MAX_IMAGES_COUNT = 6;
 
 interface OfferInfoProps {
   offerDescription: OfferDescription;
@@ -24,7 +27,7 @@ export const OfferInfo = memo((
       <div className="offer__gallery-container container">
         <div className="offer__gallery">
           {
-            offerDescription.images.map((image) => (
+            offerDescription.images.slice(0, MAX_IMAGES_COUNT).map((image) => (
               <div key={image} className="offer__image-wrapper">
                 <img className="offer__image" src={image} alt="Photo studio"/>
               </div>
@@ -39,12 +42,13 @@ export const OfferInfo = memo((
             <h1 className="offer__name">
               {offerDescription.title}
             </h1>
-            <button className="offer__bookmark-button button" type="button">
-              <svg className="offer__bookmark-icon" width={31} height={33}>
-                <use xlinkHref="#icon-bookmark"/>
-              </svg>
-              <span className="visually-hidden">To bookmarks</span>
-            </button>
+            <BookmarkButton
+              id={offerDescription.id}
+              isFavorite={offerDescription.isFavorite}
+              className={'offer'}
+              width={31}
+              height={33}
+            />
           </div>
           <RatingStars rating={offerDescription.rating} className="offer"/>
           <ul className="offer__features">

@@ -2,6 +2,8 @@ import {ChangeEvent, FormEvent, Fragment, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {useAppDispatch} from '../../../hooks/use-app-dispatch.ts';
 import {sendReviewAction} from '../../../store/api-actions.ts';
+import {useAppSelector} from '../../../hooks/use-app-selector.ts';
+import {getReviewSendingStatus} from '../../../store/offers-data/selectors.ts';
 
 const RATING = {
   5: 'perfect',
@@ -19,6 +21,7 @@ export default function OfferReviewForm() {
   const [formData, setFormData] = useState<{ rating: number | null; review: string }>({rating: null, review: ''});
   const isValid = formData.rating !== null && formData.review.length >= MIN_REVIEW_LENGTH && formData.review.length <= MAX_REVIEW_LENGTH;
   const dispatch = useAppDispatch();
+  const isReviewSending = useAppSelector(getReviewSendingStatus);
 
   function onRatingChange(evt: ChangeEvent<HTMLInputElement>) {
     const {name, value} = evt.currentTarget;
@@ -35,8 +38,9 @@ export default function OfferReviewForm() {
 
     if (offerId && formData.rating) {
       try {
-        dispatch(sendReviewAction({offerId, comment: formData.review, rating: formData.rating}));
-        setFormData({rating: null, review: ''});
+        dispatch(sendReviewAction({offerId, comment: formData.review, rating: formData.rating})).then(() => {
+          setFormData({rating: null, review: ''});
+        });
       } catch {
         // eslint-disable-next-line no-alert
         alert('Failed to send review');
@@ -50,7 +54,7 @@ export default function OfferReviewForm() {
         Your review
       </label>
       <div className="reviews__rating-form form__rating">
-        {Object.entries(RATING).map(([value, title]) => (
+        {Object.entries(RATING).reverse().map(([value, title]) => (
           <Fragment key={`${value}-stars`}>
             <input
               className="form__rating-input visually-hidden"
@@ -58,6 +62,7 @@ export default function OfferReviewForm() {
               value={value}
               id={`${value}-stars`}
               type="radio"
+              disabled={isReviewSending}
               onChange={onRatingChange}
               checked={formData.rating?.toString() === value}
             />
@@ -75,6 +80,7 @@ export default function OfferReviewForm() {
         name="review"
         placeholder="Tell how was your stay, what you like and what can be improved"
         maxLength={MAX_REVIEW_LENGTH}
+        disabled={isReviewSending}
         onChange={onReviewChange}
         value={formData.review}
       />
@@ -88,7 +94,7 @@ export default function OfferReviewForm() {
         <button
           className="reviews__submit form__submit button"
           type="submit"
-          disabled={!isValid}
+          disabled={!isValid || isReviewSending}
         >
           Submit
         </button>

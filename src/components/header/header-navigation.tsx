@@ -6,10 +6,12 @@ import {logoutAction} from '../../store/api-actions.ts';
 import {AuthorizationStatus} from '../../models/authorization-status.ts';
 import {AppRoutes} from '../../router/app-routes.ts';
 import {getAuthorizationStatus, getCurrentUser} from '../../store/user-process/selectors.ts';
+import {getFavorites} from '../../store/offers-data/selectors.ts';
 
 export function HeaderNavigation() {
   const authorizationStatus = useAppSelector(getAuthorizationStatus);
   const currentUser = useAppSelector(getCurrentUser);
+  const favorites = useAppSelector(getFavorites);
   const dispatch = useAppDispatch();
 
   function handleSignOut(evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>) {
@@ -27,13 +29,17 @@ export function HeaderNavigation() {
                 <img className="user__avatar" src={currentUser!.avatarUrl} alt="User Avatar"/>
               </div>
               <span className="header__user-name user__name">{currentUser!.email}</span>
-              <span className="header__favorite-count">3</span>
+              <span className="header__favorite-count">{favorites.length}</span>
             </Link>
           </li>
           <li className="header__nav-item">
-            <a className="header__nav-link" onClick={(evt) => handleSignOut(evt)}>
+            <Link
+              className="header__nav-link"
+              to={AppRoutes.Root}
+              onClick={handleSignOut}
+            >
               <span className="header__signout">Sign out</span>
-            </a>
+            </Link>
           </li>
         </ul>
       </nav>

@@ -13,6 +13,7 @@ export type OffersData = {
   isOfferPreviewsLoading: boolean;
   isOfferDescriptionLoading: boolean;
   isFavoritesLoading: boolean;
+  isReviewSending: boolean;
   offerDescription: OfferDescription | null;
   reviews: OfferReview[];
   nearbyOffers: OfferPreview[];

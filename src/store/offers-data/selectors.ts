@@ -27,4 +27,6 @@ export const getReviews = createSelector(
     .toSorted((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .slice(0, 10)
 );
+export const getReviewSendingStatus = (state: Pick<AppState, Namespace.Data>) => state[Namespace.Data].isReviewSending;
 export const getFavorites = (state: Pick<AppState, Namespace.Data>) => state[Namespace.Data].favorites;
+export const getFavoritesLoadingStatus = (state: Pick<AppState, Namespace.Data>) => state[Namespace.Data].isFavoritesLoading;

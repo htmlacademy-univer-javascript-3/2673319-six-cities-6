@@ -6,9 +6,12 @@ import {OfferDescription, OfferPreview, OfferReview} from '../models/offer.ts';
 import {ApiPaths} from '../services/api-paths.ts';
 import {AppRoutes} from '../router/app-routes.ts';
 import {User, UserData} from '../models/user.ts';
-import {deleteToken, setToken} from '../services/token-storage.ts';
+import {deleteToken, getToken, setToken} from '../services/token-storage.ts';
 import {AuthData} from '../models/auth-data.ts';
 import {ReviewRequest} from '../models/review-request.ts';
+import {FavoriteEditRequest} from '../models/favorite-edit-request.ts';
+import {Namespace} from '../models/namespace.ts';
+import {AuthorizationStatus} from '../models/authorization-status.ts';
 
 export const fetchOfferPreviewsAction = createAsyncThunk<OfferPreview[], undefined, {
   dispatch: AppDispatch;
@@ -86,11 +89,30 @@ export const fetchFavoritesAction = createAsyncThunk<OfferPreview[], undefined, 
   extra: AxiosInstance;
 }>(
   'data/fetchFavorites',
-  async (_arg, {extra: api}) => {
+  async (_arg, {getState, extra: api}) => {
+    if (getState()[Namespace.User].authorizationStatus !== AuthorizationStatus.Auth) {
+      return [];
+    }
     const {data} = await api.get<OfferPreview[]>(ApiPaths.Favorite);
     return data;
   }
 );
+
+export const editFavoriteStatusAction = createAsyncThunk<OfferPreview, FavoriteEditRequest, {
+  dispatch: AppDispatch;
+  state: AppState;
+  extra: AxiosInstance;
+}>(
+  'data/editFavoriteStatus',
+  async ({offerId, markFavorite}, {extra: api}) => {
+    const url = ApiPaths.FavoriteEdit
+      .replace('{offerId}', offerId)
+      .replace('{status}', markFavorite ? '1' : '0');
+    const {data} = await api.post<OfferPreview>(url);
+    return data;
+  }
+);
+
 
 export const checkAuthAction = createAsyncThunk<User, undefined, {
   dispatch: AppDispatch;
@@ -112,6 +134,9 @@ export const loginAction = createAsyncThunk<User, AuthData, {
 }>(
   'user/login',
   async ({email, password}, {dispatch, extra: api}) => {
+    if (getToken() === '') {
+      return Promise.reject();
+    }
     const {data: {token, ...user}} = await api.post<UserData>(ApiPaths.Login, {email, password});
     setToken(token);
     dispatch(redirectToRouteAction(AppRoutes.Root));
