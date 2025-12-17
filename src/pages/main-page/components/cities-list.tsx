@@ -1,9 +1,11 @@
 import {City} from '../../../models/city.ts';
 import {useAppSelector} from '../../../hooks/use-app-selector.ts';
 import {useAppDispatch} from '../../../hooks/use-app-dispatch.ts';
-import {memo} from 'react';
+import React, {memo} from 'react';
 import {getCity} from '../../../store/options-process/selectors.ts';
 import {changeCityAction} from '../../../store/options-process/options-process.ts';
+import {Link} from 'react-router-dom';
+import {AppRoutes} from '../../../router/app-routes.ts';
 
 interface CitiesListProps {
   cities: readonly City[];
@@ -11,11 +13,12 @@ interface CitiesListProps {
 
 export const CitiesList = memo(({
   cities
-}: CitiesListProps)=> {
+}: CitiesListProps) => {
   const selectedCity = useAppSelector(getCity);
   const dispatch = useAppDispatch();
 
-  function onCityClick(city: City) {
+  function onCityClick(evt: React.MouseEvent<HTMLAnchorElement, MouseEvent>, city: City) {
+    evt.preventDefault();
     dispatch(changeCityAction(city));
   }
 
@@ -26,13 +29,13 @@ export const CitiesList = memo(({
           {
             cities.map((city) => (
               <li className="locations__item" key={city.name}>
-                <a
+                <Link
                   className={`locations__item-link tabs__item ${selectedCity === city ? 'tabs__item--active' : ''}`}
-                  onClick={() => onCityClick(city)}
-                  href="#"
+                  to={AppRoutes.Root}
+                  onClick={(evt) => onCityClick(evt, city)}
                 >
                   <span>{city.name}</span>
-                </a>
+                </Link>
               </li>
             ))
           }

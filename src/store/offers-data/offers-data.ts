@@ -1,5 +1,6 @@
 import {createSlice} from '@reduxjs/toolkit';
 import {
+  editFavoriteStatusAction,
   fetchFavoritesAction,
   fetchNearbyOffersAction, fetchOfferDescriptionAction,
   fetchOfferPreviewsAction,
@@ -13,6 +14,7 @@ const initialState: OffersData = {
   isOfferPreviewsLoading: false,
   isOfferDescriptionLoading: false,
   isFavoritesLoading: false,
+  isReviewSending: false,
   offerDescription: null,
   reviews: [],
   nearbyOffers: [],
@@ -42,8 +44,15 @@ export const offersData = createSlice({
       .addCase(fetchReviewsAction.fulfilled, (state, action) => {
         state.reviews = action.payload;
       })
+      .addCase(sendReviewAction.pending, (state) => {
+        state.isReviewSending = true;
+      })
       .addCase(sendReviewAction.fulfilled, (state, action) => {
         state.reviews.push(action.payload);
+        state.isReviewSending = false;
+      })
+      .addCase(sendReviewAction.rejected, (state) => {
+        state.isReviewSending = false;
       })
       .addCase(fetchOfferDescriptionAction.pending, (state) => {
         state.isOfferDescriptionLoading = true;
@@ -64,6 +73,27 @@ export const offersData = createSlice({
       })
       .addCase(fetchFavoritesAction.rejected, (state) => {
         state.isFavoritesLoading = false;
+      }).
+      addCase(editFavoriteStatusAction.fulfilled, (state, action) => {
+        const offer = action.payload;
+        const actualOffer = state.offerPreviews.find((o) => o.id === offer.id);
+        if (actualOffer) {
+          actualOffer.isFavorite = offer.isFavorite;
+        }
+        const actualNearby = state.nearbyOffers.find((o) => o.id === offer.id);
+        if (actualNearby) {
+          actualNearby.isFavorite = offer.isFavorite;
+        }
+        const actualFavorite = state.favorites.find((f) => f.id === offer.id);
+        if (offer.isFavorite && !actualFavorite) {
+          state.favorites.push(offer);
+        }
+        if (!offer.isFavorite && actualFavorite) {
+          state.favorites = state.favorites.filter((f) => f.id !== offer.id);
+        }
+        if (state.offerDescription && state.offerDescription.id === offer.id) {
+          state.offerDescription.isFavorite = offer.isFavorite;
+        }
       });
   }
 });
